@@ -1,0 +1,87 @@
+---
+import logo from "../../public/logo.svg?raw";
+import { LINKS } from "../data/data";
+---
+
+<footer>
+  <a href="/" title="Blogr logo - link to homepage">
+    <Fragment set:html={logo} />
+  </a>
+  <nav>
+    {
+      LINKS.map((group) => (
+        <div>
+          <h3>{group.name}</h3>
+          <ul role="list">
+            {group.links.map((link) => (
+              <li>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </nav>
+</footer>
+
+<style scoped>
+  footer {
+    display: grid;
+    padding-inline: container();
+    gap: 4rem 0;
+    padding-block: 4rem;
+    border-start-end-radius: fluid(5rem, 6.25rem);
+    background-color: var(--very-dark-black-blue);
+    color: var(--grayish-blue);
+    text-align: center;
+    justify-content: center;
+  }
+
+  @media (width >= 768px) {
+    footer {
+      text-align: left;
+      grid-template-columns: repeat(4, 1fr);
+      align-items: start;
+    }
+  }
+
+  a {
+    color: inherit;
+  }
+
+  nav {
+    display: grid;
+    place-content: center;
+    gap: 2.5rem 0;
+  }
+
+  @media (width >= 768px) {
+    nav {
+      grid-column: span 3;
+      grid-template-columns: repeat(3, 1fr);
+      align-items: start;
+    }
+  }
+
+  footer > a {
+    display: inline-block;
+    justify-self: start;
+  }
+
+  h3 {
+    font-size: 1rem;
+    margin-block-end: 2em;
+  }
+
+  li > a {
+    display: block;
+    padding-block: 0.24rem;
+    opacity: 0.75;
+    transition: all 0.25s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+
+  li > a:is(:hover, :focus-visible) {
+    opacity: 1;
+  }
+</style>

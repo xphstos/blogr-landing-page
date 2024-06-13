@@ -1,0 +1,55 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"a"> {
+  variant?: "solid" | "outlined";
+}
+
+const { variant = "solid", href, ...attrs } = Astro.props;
+---
+
+<a href={href} {...attrs} data-variant={variant}><slot /></a>
+
+<style scoped>
+  a {
+    min-height: fluid(2.5rem, 3rem);
+    border-radius: 100vmax;
+    text-decoration: none;
+    font-weight: 700;
+    line-height: 1rem;
+    white-space: nowrap;
+    font-size: fluid(0.875rem, 1rem);
+    padding-inline: 1.25rem;
+    padding-block: 0.75rem;
+    transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  a:is(:focus) {
+    outline: 0.15em solid transparent;
+  }
+
+  a[data-variant="solid"] {
+    background-color: var(--white);
+    color: var(--light-red);
+  }
+
+  a[data-variant="solid"]:is(:hover, :focus-visible) {
+    background-color: var(--light-red);
+    color: var(--white);
+  }
+
+  a[data-variant="outlined"] {
+    outline: 0.15em solid var(--white);
+    outline-offset: -0.15em;
+    background-color: transparent;
+    color: var(--white);
+  }
+
+  a[data-variant="outlined"]:is(:hover, :focus-visible) {
+    background-color: var(--white);
+    color: var(--light-red);
+  }
+</style>

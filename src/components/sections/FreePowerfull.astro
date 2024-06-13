@@ -1,0 +1,120 @@
+---
+
+---
+
+<section class="root">
+  <figure>
+    <picture>
+      <source
+        srcset="/illustration-laptop-mobile.svg"
+        media="(max-width:1024px)"
+      />
+      <img src="/illustration-laptop-desktop.svg" alt="" />
+    </picture>
+  </figure>
+  <div>
+    <section>
+      <header>
+        <h3>Free, open, simple</h3>
+        <p>
+          Blogr is a free and open source application backed by a large
+          community of helpful developers. It supports features such as code
+          syntax highlighting, RSS feeds, social media integration, third-party
+          commenting tools, and works seamlessly with Google Analytics. The
+          architecture is clean and is relatively easy to learn.
+        </p>
+      </header>
+    </section>
+    <section>
+      <header>
+        <h3>Powerful tooling</h3>
+        <p>
+          Batteries included. We built a simple and straightforward CLI tool
+          that makes customization and deployment a breeze, but capable of
+          producing even the most complicated sites.
+        </p>
+      </header>
+    </section>
+  </div>
+</section>
+
+<style scoped>
+  .root {
+    display: grid;
+    place-items: center;
+    text-align: center;
+    gap: fluid(1.5rem, 3rem);
+    padding-inline: container();
+    color: var(--very-dark-grayish-blue);
+    padding-block: 3.5rem fluid(3.5rem, 7rem);
+  }
+
+  @media (width >= 1024px) {
+    .root {
+      text-align: left;
+      overflow: clip;
+      padding-inline: 0 container();
+      justify-content: space-between;
+      align-items: center;
+      grid-template-columns: 1fr min(34rem, 100%);
+    }
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  @media (width >= 1024px) {
+    figure {
+      aspect-ratio: 695 / 785;
+      position: relative;
+      width: 100%;
+    }
+
+    figure picture {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      translate: 0 -50%;
+      width: auto;
+      height: 100%;
+    }
+
+    figure img {
+      object-fit: cover;
+      object-position: right center;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .root > div {
+    display: grid;
+    gap: fluid(2.5rem, 4rem);
+  }
+
+  @media (width >= 1024px) {
+    .root > div {
+      grid-column-start: 2;
+    }
+  }
+
+  @media (width < 1024px) {
+    .root > * {
+      width: min(40rem, 100%);
+    }
+  }
+
+  h3 {
+    font-size: fluid(1.5rem, 1.75rem);
+    font-weight: 500;
+    margin-block-end: fluid(1rem, 1.75rem);
+    color: var(--very-dark-blue);
+  }
+
+  p {
+    line-height: 1.75;
+    color: var(--very-dark-grayish-blue);
+    text-wrap: balance;
+  }
+</style>
