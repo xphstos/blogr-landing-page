@@ -1,0 +1,212 @@
+---
+import { LINKS } from "../data/data";
+import Button from "./Button.astro";
+---
+
+<dialog>
+  <menu class="mobile-list" data-status="close">
+    {
+      LINKS.map((item) => (
+        <li>
+          <div class="mobile-link mobile-link--empty" tabindex="0">
+            <span class="mobile-link__label">{item.name}</span>
+            <svg
+              class="mobile-link__icon"
+              width="10"
+              height="7"
+              viewBox="0 0 10 7"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M1 1L5 5L9 1" stroke="#FF7B86" stroke-width="2" />
+            </svg>
+          </div>
+          <ul class="mobile-sublist" role="list">
+            {item.links.map((link) => (
+              <li>
+                <a class="mobile-sublink" href={link.href}>
+                  <span class="mobile-sublink__label">{link.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))
+    }
+    <li></li>
+    <li>
+      <a class="mobile-link" href="#1">
+        <span class="mobile-link__label">Login</span>
+      </a>
+    </li>
+    <li>
+      <Button href="#1" variant="gradient">Sign Up</Button>
+    </li>
+  </menu>
+</dialog>
+<button
+  class="open"
+  onclick="document.querySelector('dialog').show()"
+  aria-label="Menu"
+>
+  <svg
+    width="32"
+    height="18"
+    viewBox="0 0 32 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M0 0H32V2H0V0ZM0 8H32V10H0V8ZM0 16H32V18H0V16Z"
+      fill="white"></path>
+  </svg>
+</button>
+<button
+  class="close"
+  onclick="document.querySelector('dialog').close()"
+  aria-label="Close"
+>
+  <svg
+    width="26"
+    height="26"
+    viewBox="0 0 26 26"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M23.6075 0.97998L25.0215 2.39298L14.4145 13L25.0215 23.607L23.6075 25.021L13.0005 14.414L2.39347 25.021L0.980469 23.607L11.5865 13L0.980469 2.39298L2.39347 0.97998L13.0005 11.586L23.6075 0.97998Z"
+      fill="white"></path>
+  </svg>
+</button>
+
+<style scoped>
+  dialog {
+    position: fixed;
+    width: auto;
+    inset: var(--header-height, 120px) 1.5rem auto 1.5rem;
+    padding: 0;
+    border: none;
+    border-radius: 0.5rem;
+    overflow: clip;
+    opacity: 0;
+    transition:
+      opacity 0.25s,
+      display 0.25s allow-discrete;
+  }
+
+  dialog[open] {
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  dialog[open] ~ .open {
+    display: none;
+  }
+
+  dialog:not([open]) ~ .close {
+    display: none;
+  }
+
+  button {
+    display: grid;
+    aspect-ratio: 1;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    place-items: center;
+    place-content: center;
+    width: 3rem;
+    cursor: pointer;
+    color: var(--white);
+  }
+
+  button > svg {
+    margin: auto;
+    grid-area: 1 / -1;
+  }
+
+  menu {
+    background: white;
+    margin: 0;
+    padding: 1.5rem;
+    color: var(--very-dark-grayish-blue);
+    list-style: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem var(--very-dark-black-blue-shadow);
+  }
+
+  li:empty {
+    display: block;
+    height: 1px;
+    background-color: hsl(240deg 7% 94%);
+    margin-block: 1.5rem 0.5rem;
+  }
+
+  menu li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    /* justify-content: center; */
+  }
+
+  .mobile-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .mobile-link--empty {
+    cursor: pointer;
+  }
+
+  .mobile-link--empty:focus,
+  .mobile-link--empty:focus-within {
+    opacity: 0.75;
+  }
+
+  .mobile-link__icon {
+    width: 0.625rem;
+    height: 0.625rem;
+    display: inline-block;
+  }
+
+  .mobile-link:focus .mobile-link__icon {
+    scale: -1;
+  }
+
+  .mobile-sublist {
+    text-align: center;
+    background-color: hsl(240deg 7% 94%);
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    display: none;
+  }
+
+  .mobile-link:is(:focus, :focus-within) + .mobile-sublist,
+  .mobile-sublist:focus-within {
+    display: block;
+  }
+
+  .mobile-sublink {
+    padding: 0.5rem;
+    opacity: 0.75;
+    transition: 0.2s;
+    width: 100%;
+  }
+
+  .mobile-sublink:is(:focus-visible, :hover) {
+    opacity: 1;
+  }
+</style>

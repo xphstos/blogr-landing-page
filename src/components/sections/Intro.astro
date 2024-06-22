@@ -8,8 +8,8 @@ import Button from "../Button.astro";
     <p>Grow your audience and build your online brand</p>
   </header>
   <div>
-    <Button href="#">Start for free</Button>
-    <Button href="#" variant="outlined">Learn More</Button>
+    <Button href="#1">Start for free</Button>
+    <Button href="#1" variant="outlined">Learn More</Button>
   </div>
 </section>
 
@@ -20,11 +20,12 @@ import Button from "../Button.astro";
     place-content: center;
     text-align: center;
     color: var(--white);
-    min-height: fluid(32rem, 37.5rem);
+    height: max(32rem, 55vh);
+    /* min-height: fluid(32rem, 37.5rem); */
     border-end-start-radius: fluid(5rem, 6.25rem);
     background:
       url("/bg-pattern-intro-desktop.svg") no-repeat right -50vw center / 140% auto,
-      linear-gradient(to right, var(--very-light-red), var(--light-red) 40%);
+      linear-gradient(to right, var(--gradient-red));
   }
 
   @media (width < 768px) {

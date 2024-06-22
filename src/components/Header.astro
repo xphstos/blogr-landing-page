@@ -1,0 +1,246 @@
+---
+import { LINKS } from "../data/data";
+import Button from "./Button.astro";
+import MobileMenu from "./MobileMenu.astro";
+import Logo from "../../public/logo.svg?raw";
+---
+
+<header class="header" data-scrolling="false">
+  <nav>
+    <ul role="list" class="list">
+      <li>
+        <a class="homelink" href="/" aria-label="Blogr logo - link to homepage">
+          <Fragment set:html={Logo} />
+        </a>
+      </li>
+      {
+        LINKS.map((item) => (
+          <li>
+            <div class="link link--empty" tabindex="0">
+              <span class="link__label">{item.name}</span>
+              <svg
+                class="link__icon"
+                aria-label="hidden"
+                width="10"
+                height="7"
+                viewBox="0 0 10 7"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  opacity="0.75"
+                  d="M1 1L5 5L9 1"
+                  stroke="white"
+                  stroke-width="2"
+                />
+              </svg>
+            </div>
+            <div class="sublist-wrapper">
+              <ul class="sublist" role="list">
+                {item.links.map((link) => (
+                  <li>
+                    <a class="sublink" href={link.href} aria-label={link.label}>
+                      <span class="sublink__label">{link.label}</span>
+                      <strong class="sublink__label" aria-hidden="true">
+                        {link.label}
+                      </strong>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </li>
+        ))
+      }
+      <li>
+        <a class="link" href="#1">
+          <span class="link__label">Login</span>
+        </a>
+      </li>
+      <li>
+        <Button href="#1">Sign Up</Button>
+      </li>
+      <li>
+        <MobileMenu />
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<style scoped>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    padding-inline: container();
+    padding-block: 3.625rem 2.5rem;
+    transition: all 0.25s ease-in-out;
+    z-index: 1;
+  }
+
+  .header[data-scrolling="true"] {
+    padding-block: 1rem;
+    background: linear-gradient(to right, var(--gradient-red));
+  }
+
+  .homelink {
+    display: inline-block;
+    margin-inline-end: 2.75rem;
+  }
+
+  .list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .list > li:nth-last-child(3) {
+    margin-inline: auto 1rem;
+  }
+
+  .list > li:last-child {
+    display: none;
+  }
+
+  @media (width < 1024px) {
+    .list > li:last-child {
+      display: block;
+    }
+
+    .list > li:nth-child(n + 2):nth-child(-n + 6) {
+      display: none;
+    }
+  }
+
+  li {
+    position: relative;
+  }
+
+  a:focus,
+  [tabindex]:focus {
+    outline: 0.15em solid transparent;
+    outline-offset: 0.15em;
+  }
+
+  .link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    color: var(--white);
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+  }
+
+  .link .link__label {
+    opacity: 0.75;
+  }
+
+  .link__label {
+    transition: opacity 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .link:is(:focus-visible, :focus, :hover) .link__label {
+    opacity: 1;
+    text-decoration: underline;
+  }
+
+  .link__icon {
+    width: 0.625rem;
+    height: auto;
+    translate: 0 0.15em;
+  }
+
+  .link:is(:hover, :focus, :focus-visible) .link__icon {
+    scale: -1;
+  }
+
+  li:focus-within .sublist-wrapper,
+  :is(.link--empty:focus-visible, .link--empty:focus, .link--empty:hover)
+    ~ .sublist-wrapper,
+  .sublist-wrapper:is(:focus, :focus-visible, :hover, :focus-within) {
+    opacity: 1;
+    translate: 0;
+    pointer-events: auto;
+    visibility: visible;
+  }
+
+  .sublist-wrapper {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding-block-start: 1rem;
+    width: max(10rem, 100%);
+    pointer-events: none;
+    translate: 0 0.5rem;
+    visibility: hidden;
+    transition: all 0.25s cubic-bezier(0.86, 0, 0.07, 1);
+    opacity: 0;
+  }
+
+  .sublist {
+    border-radius: 0.25rem;
+    background-color: var(--white);
+    box-shadow: 0.5rem 0 1rem hsl(0deg 0% 0% / 0.15);
+    padding: 1rem 0.5rem;
+  }
+
+  .sublink {
+    display: grid;
+    color: var(--very-dark-grayish-blue);
+  }
+
+  .sublink:is(:hover, :focus-visible: focus) span.sublink__label {
+    opacity: 0;
+  }
+
+  .sublink:is(:hover, :focus-visible: focus) strong.sublink__label {
+    opacity: 1;
+  }
+
+  .sublink__label {
+    grid-area: 1 / -1;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+    transition: opacity 0.1s linear;
+  }
+
+  strong.sublink__label {
+    opacity: 0;
+  }
+</style>
+
+<script is:inline>
+  const HEADER = document.querySelector("header");
+  const isMobile = window.matchMedia("(max-width: 768px)");
+
+  const handleHeader = () => {
+    const { scrollY } = window;
+
+    if (!HEADER) return;
+
+    if (scrollY > HEADER.getBoundingClientRect().height) {
+      HEADER.dataset.scrolling = "true";
+    } else {
+      HEADER.dataset.scrolling = "false";
+    }
+  };
+
+  const setHeaderHeight = () => {
+    if (!HEADER) return;
+
+    document.documentElement.style.setProperty(
+      "--header-height",
+      Math.ceil(HEADER.getBoundingClientRect().height) + "px",
+    );
+  };
+
+  setHeaderHeight();
+
+  HEADER && HEADER.addEventListener("transitionend", setHeaderHeight);
+
+  window.addEventListener("scroll", handleHeader);
+</script>

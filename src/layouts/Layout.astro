@@ -42,11 +42,11 @@ const { title, description } = Astro.props;
     --grayish-blue: hsl(240deg 2% 79%);
     --very-dark-grayish-blue: hsl(207deg 13% 34%);
     --very-dark-black-blue: hsl(240deg 10% 16%);
+    --very-dark-black-blue-shadow: hsl(240deg 10% 16% / 0.1);
 
     /* background gradient - intro/cta mobile nav: */
 
-    /* --very-light-red: hsl(13deg 100% 72%);
---light-red: hsl(353deg 100% 62%); */
+    --gradient-red: hsl(13deg 100% 72%), hsl(353deg 100% 62%);
 
     /* background gradient - body: */
 
@@ -101,6 +101,10 @@ const { title, description } = Astro.props;
   a {
     text-decoration: none;
   }
+  a:visited {
+    color: inherit;
+  }
+
   /* Make images easier to work with */
   img,
   picture {

@@ -4,23 +4,23 @@ export const LINKS = [
     links: [
       {
         label: "Overview",
-        href: "#",
+        href: "#1",
       },
       {
         label: "Pricing",
-        href: "#",
+        href: "#1",
       },
       {
         label: "Marketplace",
-        href: "#",
+        href: "#1",
       },
       {
         label: "Features",
-        href: "#",
+        href: "#1",
       },
       {
         label: "Integrations",
-        href: "#",
+        href: "#1",
       },
     ],
   },
@@ -29,19 +29,19 @@ export const LINKS = [
     links: [
       {
         label: "About",
-        href: "#",
+        href: "#1",
       },
       {
         label: "Team",
-        href: "#",
+        href: "#1",
       },
       {
         label: "Blog",
-        href: "#",
+        href: "#1",
       },
       {
         label: "Careers",
-        href: "#",
+        href: "#1",
       },
     ],
   },
@@ -50,15 +50,15 @@ export const LINKS = [
     links: [
       {
         label: "Contact",
-        href: "#",
+        href: "#1",
       },
       {
         label: "Newsletter",
-        href: "#",
+        href: "#1",
       },
       {
         label: "LinkedIn",
-        href: "#",
+        href: "#1",
       },
     ],
   },

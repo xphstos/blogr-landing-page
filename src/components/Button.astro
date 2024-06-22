@@ -2,16 +2,16 @@
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"a"> {
-  variant?: "solid" | "outlined";
+  variant?: "solid" | "outlined" | "gradient";
 }
 
 const { variant = "solid", href, ...attrs } = Astro.props;
 ---
 
-<a href={href} {...attrs} data-variant={variant}><slot /></a>
+<a class="button" href={href} {...attrs} data-variant={variant}><slot /></a>
 
 <style scoped>
-  a {
+  .button {
     min-height: fluid(2.5rem, 3rem);
     border-radius: 100vmax;
     text-decoration: none;
@@ -27,29 +27,41 @@ const { variant = "solid", href, ...attrs } = Astro.props;
     justify-content: center;
   }
 
-  a:is(:focus) {
+  .button:is(:focus) {
     outline: 0.15em solid transparent;
   }
 
-  a[data-variant="solid"] {
+  .button[data-variant="solid"] {
     background-color: var(--white);
     color: var(--light-red);
   }
 
-  a[data-variant="solid"]:is(:hover, :focus-visible) {
+  .button[data-variant="solid"]:is(:hover, :focus-visible) {
     background-color: var(--light-red);
     color: var(--white);
   }
 
-  a[data-variant="outlined"] {
+  .button[data-variant="outlined"] {
     outline: 0.15em solid var(--white);
     outline-offset: -0.15em;
     background-color: transparent;
     color: var(--white);
   }
 
-  a[data-variant="outlined"]:is(:hover, :focus-visible) {
+  .button[data-variant="outlined"]:is(:hover, :focus-visible) {
     background-color: var(--white);
     color: var(--light-red);
+  }
+
+  .button[data-variant="gradient"] {
+    background: linear-gradient(to right, var(--gradient-red)) no-repeat left
+      center / 100% 100%;
+    color: var(--white);
+  }
+
+  .button[data-variant="gradient"]:is(:hover, :focus-visible) {
+    background: linear-gradient(to right, var(--gradient-red)) no-repeat left
+      center / 300% 100%;
+    color: var(--white);
   }
 </style>
