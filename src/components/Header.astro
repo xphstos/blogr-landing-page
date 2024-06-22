@@ -193,11 +193,11 @@ import Logo from "../../public/logo.svg?raw";
     color: var(--very-dark-grayish-blue);
   }
 
-  .sublink:is(:hover, :focus-visible: focus) span.sublink__label {
+  .sublink:is(:hover, :focus-visible, :focus) span.sublink__label {
     opacity: 0;
   }
 
-  .sublink:is(:hover, :focus-visible: focus) strong.sublink__label {
+  .sublink:is(:hover, :focus-visible, :focus) strong.sublink__label {
     opacity: 1;
   }
 
@@ -215,7 +215,6 @@ import Logo from "../../public/logo.svg?raw";
 
 <script>
   const HEADER = document.querySelector("header");
-  const isMobile = window.matchMedia("(max-width: 768px)");
 
   const handleHeader = () => {
     const { scrollY } = window;
