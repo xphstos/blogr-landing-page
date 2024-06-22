@@ -92,7 +92,9 @@ import Button from "./Button.astro";
     border: none;
     border-radius: 0.5rem;
     overflow: clip;
+    z-index: 100;
     opacity: 0;
+    box-shadow: 0 0.5rem 1rem var(--very-dark-black-blue-shadow);
     transition:
       opacity 0.25s,
       display 0.25s allow-discrete;
@@ -139,7 +141,10 @@ import Button from "./Button.astro";
     color: var(--very-dark-grayish-blue);
     list-style: none;
     border-radius: 0.5rem;
-    box-shadow: 0 0.5rem 1rem var(--very-dark-black-blue-shadow);
+  }
+
+  a {
+    color: inherit;
   }
 
   li:empty {
